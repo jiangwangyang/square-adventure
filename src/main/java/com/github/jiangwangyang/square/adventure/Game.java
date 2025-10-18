@@ -11,7 +11,8 @@ import com.github.jiangwangyang.square.adventure.cell.Cell;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
 import com.github.jiangwangyang.square.adventure.cell.entity.player.AIPlayer;
-import com.github.jiangwangyang.square.adventure.cell.entity.player.CurrentPlayer;
+import com.github.jiangwangyang.square.adventure.cell.entity.player.InputPlayer;
+import com.github.jiangwangyang.square.adventure.cell.entity.player.Player;
 import com.github.jiangwangyang.square.adventure.cell.item.Item;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemDrop;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemRandom;
@@ -34,7 +35,7 @@ public final class Game implements Runnable {
     private final List<Entity> entities = new CopyOnWriteArrayList<>();
     private final List<Item> items = new CopyOnWriteArrayList<>();
     private final List<Effect> effects = new CopyOnWriteArrayList<>();
-    private final CurrentPlayer currentPlayer = new CurrentPlayer();
+    private final Player currentPlayer = new InputPlayer();
     private volatile boolean running = true;
 
     public Game() {

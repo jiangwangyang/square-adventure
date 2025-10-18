@@ -3,6 +3,7 @@ package com.github.jiangwangyang.square.adventure;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.github.jiangwangyang.square.adventure.action.*;
+import com.github.jiangwangyang.square.adventure.cell.entity.player.InputPlayer;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -11,7 +12,10 @@ public final class GameInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyDown(int i) {
-        BlockingQueue<Action> currentAction = Application.INSTANCE.getGame().getCurrentPlayer().getCurrentAction();
+        if (!(Application.INSTANCE.getGame().getCurrentPlayer() instanceof InputPlayer inputPlayer)) {
+            return false;
+        }
+        BlockingQueue<Action> currentAction = inputPlayer.getInputAction();
         List<Action> actions = Application.INSTANCE.getGame().getCurrentPlayer().getActions();
         switch (i) {
             case Input.Keys.W -> currentAction.offer(MoveUp.INSTANCE);

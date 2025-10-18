@@ -1,5 +1,7 @@
 package com.github.jiangwangyang.square.adventure.cell.entity;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jiangwangyang.square.adventure.Application;
 import com.github.jiangwangyang.square.adventure.Game;
 import com.github.jiangwangyang.square.adventure.TextureDrawer;
@@ -27,6 +29,7 @@ public abstract class Entity implements Cell {
     public volatile double health, maxHealth, damage;
     public volatile boolean flip = false;
     public volatile int kill;
+    protected boolean drawHealth = false;
 
     public Entity(TextureDrawer drawer) {
         this.drawer = drawer;
@@ -35,6 +38,17 @@ public abstract class Entity implements Cell {
     @Override
     public void draw() {
         drawer.draw(x, y, 0, 1, flip);
+        // 血量
+        if (drawHealth) {
+            ShapeRenderer shapeRenderer = Application.INSTANCE.getShapeRenderer();
+            shapeRenderer.setColor(Color.WHITE);
+            shapeRenderer.rect((float) ((x - 0.5) * Cell.SIZE) - 1, (float) ((y + 0.5) * Cell.SIZE), Cell.SIZE + 2, 6);
+            shapeRenderer.setColor(Color.GREEN);
+            shapeRenderer.rect((float) ((x - 0.5) * Cell.SIZE), (float) ((y + 0.5) * Cell.SIZE) + 1, (float) (Cell.SIZE * health / 100), 1);
+            shapeRenderer.rect((float) ((x - 0.5) * Cell.SIZE), (float) ((y + 0.5) * Cell.SIZE) + 2, (float) (Cell.SIZE * health / 100), 1);
+            shapeRenderer.rect((float) ((x - 0.5) * Cell.SIZE), (float) ((y + 0.5) * Cell.SIZE) + 3, (float) (Cell.SIZE * health / 100), 1);
+            shapeRenderer.rect((float) ((x - 0.5) * Cell.SIZE), (float) ((y + 0.5) * Cell.SIZE) + 4, (float) (Cell.SIZE * health / 100), 1);
+        }
     }
 
     @Override
