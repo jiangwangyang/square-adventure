@@ -6,7 +6,7 @@ import com.github.jiangwangyang.square.adventure.cell.entity.player.AIPlayer;
 import com.github.jiangwangyang.square.adventure.cell.item.Item;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemDrop;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemRandom;
-import com.github.jiangwangyang.square.adventure.cell.plot.*;
+import com.github.jiangwangyang.square.adventure.cell.plot.Plot;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ public final class Game implements Runnable {
 
     public static final int WIDTH = 100;
     public static final int HEIGHT = 60;
-    public static final int PLAYER_NUM = 50;
+    public static final int PLAYER_NUM = 20;
     public static final int ITEM_NUM = 50;
 
     private volatile Plot[][] grid;
@@ -46,21 +46,7 @@ public final class Game implements Runnable {
         items = new CopyOnWriteArrayList<>();
         effects = new CopyOnWriteArrayList<>();
         // 初始化grid网格
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Plot plot = switch (ThreadLocalRandom.current().nextInt(7)) {
-                    case 0 -> new PlotWater(i, j);
-                    case 1 -> new PlotLava(i, j);
-                    case 2 -> new PlotGranite(i, j);
-                    case 3 -> new PlotRedSand(i, j);
-                    case 4 -> new PlotSand(i, j);
-                    case 5 -> new PlotSandstone(i, j);
-                    case 6 -> new PlotSandstone2(i, j);
-                    default -> throw new IllegalStateException("Unexpected value");
-                };
-                grid[i][j] = plot;
-            }
-        }
+        MapGenerator.generate(grid);
         // plot列表为空
         // 初始化entity列表
         for (int i = 0; i < PLAYER_NUM; i++) {
