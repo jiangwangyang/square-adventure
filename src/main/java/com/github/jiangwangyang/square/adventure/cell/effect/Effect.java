@@ -8,7 +8,7 @@ public abstract class Effect extends AbstractCell {
 
     // 图片 横向数量 纵向数量
     public long startMillis = System.currentTimeMillis();
-    public double x, y, scale;
+    public double scale;
 
     @Override
     public void draw() {

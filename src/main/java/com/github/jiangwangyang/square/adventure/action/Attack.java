@@ -23,22 +23,8 @@ public final class Attack implements Action {
 
     @Override
     public void act(Entity current) {
-        double x = current.x;
-        double y = current.y;
-        switch (current.direction) {
-            case Entity.LEFT:
-                x -= 0.5;
-                break;
-            case Entity.RIGHT:
-                x += 0.5;
-                break;
-            case Entity.UP:
-                y += 0.5;
-                break;
-            case Entity.DOWN:
-                y -= 0.5;
-                break;
-        }
+        int x = current.x;
+        int y = current.y;
         current.damageRange(x, y, Math.sqrt(2), current.damage);
         Game.INSTANCE.getEffects().add(new Effect1653(x, y, 3));
     }
