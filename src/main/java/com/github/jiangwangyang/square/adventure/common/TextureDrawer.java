@@ -1,4 +1,4 @@
-package com.github.jiangwangyang.square.adventure;
+package com.github.jiangwangyang.square.adventure.common;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,6 +13,14 @@ public final class TextureDrawer {
     private final int pieceWidth, pieceHeight;
 
     public TextureDrawer(Texture texture, int xNum, int yNum) {
+        if (texture == null) {
+            this.texture = null;
+            this.xNum = 0;
+            this.yNum = 0;
+            this.pieceWidth = 0;
+            this.pieceHeight = 0;
+            return;
+        }
         this.texture = texture;
         this.xNum = xNum;
         this.yNum = yNum;
@@ -21,11 +29,15 @@ public final class TextureDrawer {
     }
 
     public void draw(double x, double y) {
-        draw(x, y, 0, 1, false);
+        draw(x, y, 0, 1, false, true);
     }
 
-    public void draw(double x, double y, long startMillis, double scale, boolean flip) {
-        int i = (int) ((System.currentTimeMillis() - startMillis) / FRAME_MILLIS) % length();
+    public void draw(double x, double y, long startMillis, double scale, boolean flip, boolean circular) {
+        int i = (int) ((System.currentTimeMillis() - startMillis) / FRAME_MILLIS);
+        if (!circular && i >= length()) {
+            return;
+        }
+        i %= length();
         double size = Cell.SIZE * scale;
         x = x * Cell.SIZE - size / 2;
         y = y * Cell.SIZE - size / 2;

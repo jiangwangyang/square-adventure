@@ -1,38 +1,38 @@
 package com.github.jiangwangyang.square.adventure.cell.item;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.github.jiangwangyang.square.adventure.Application;
-import com.github.jiangwangyang.square.adventure.TextureDrawer;
 import com.github.jiangwangyang.square.adventure.action.Action;
+import com.github.jiangwangyang.square.adventure.action.ActionPool;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
 import com.github.jiangwangyang.square.adventure.cell.entity.player.Player;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ItemDrop extends Item {
 
-    public static final Texture CLOSED_TEXTURE = new Texture("item/ChallengeTower_raffle_box07.png");
-    public static final Texture OPEN_TEXTURE = new Texture("item/ChallengeTower_raffle_box07_on.png");
-
-    private final List<Action> actions;
+    private final List<Action> actions = new ArrayList<>();
 
     public ItemDrop(int x, int y, List<Action> actions) {
-        super(new TextureDrawer(CLOSED_TEXTURE, 1, 1), new TextureDrawer(OPEN_TEXTURE, 1, 1), x, y);
-        this.actions = List.of(actions.toArray(Action[]::new));
+        this.x = x;
+        this.y = y;
+        this.closedDrawerName = "Item07";
+        this.openDrawerName = "ItemOpen07";
+        this.actions.addAll(actions);
     }
 
     @Override
     public void act() {
-        for (Entity entity : Application.INSTANCE.getGame().getEntities()) {
+        for (Entity entity : Game.INSTANCE.getEntities()) {
             if (entity instanceof Player player && x == player.x && y == player.y) {
                 open = true;
                 for (Action action : actions) {
-                    if (player.getActions().size() < 9) {
-                        player.getActions().add(action);
+                    if (player.actions.size() < 9) {
+                        player.actions.add(action);
                     }
                 }
-                if (player.getActions().size() < 9) {
-                    player.getActions().add(player.randomAction());
+                if (player.actions.size() < 9) {
+                    player.actions.add(ActionPool.randomAction());
                 }
             }
         }

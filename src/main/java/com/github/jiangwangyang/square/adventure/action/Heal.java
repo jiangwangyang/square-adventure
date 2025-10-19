@@ -1,8 +1,8 @@
 package com.github.jiangwangyang.square.adventure.action;
 
-import com.github.jiangwangyang.square.adventure.Application;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect1652;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
 public final class Heal implements Action {
 
@@ -26,6 +26,6 @@ public final class Heal implements Action {
         int x = current.x;
         int y = current.y;
         current.healed(15);
-        Application.INSTANCE.getGame().getEffects().add(new Effect1652(x, y, 3));
+        Game.INSTANCE.getEffects().add(new Effect1652(x, y, 3));
     }
 }

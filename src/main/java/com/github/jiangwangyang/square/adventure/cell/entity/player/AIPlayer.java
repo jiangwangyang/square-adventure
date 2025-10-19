@@ -36,7 +36,7 @@ public final class AIPlayer extends Player {
             }
         } finally {
             if (ThreadLocalRandom.current().nextInt(100) < 10 && actions.size() < 9) {
-                actions.add(randomAction());
+                actions.add(ActionPool.randomAction());
             }
         }
     }

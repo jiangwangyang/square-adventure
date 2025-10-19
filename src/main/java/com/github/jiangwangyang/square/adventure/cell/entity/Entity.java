@@ -2,42 +2,34 @@ package com.github.jiangwangyang.square.adventure.cell.entity;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.github.jiangwangyang.square.adventure.Application;
-import com.github.jiangwangyang.square.adventure.Game;
-import com.github.jiangwangyang.square.adventure.TextureDrawer;
 import com.github.jiangwangyang.square.adventure.action.Action;
+import com.github.jiangwangyang.square.adventure.cell.AbstractCell;
 import com.github.jiangwangyang.square.adventure.cell.Cell;
 import com.github.jiangwangyang.square.adventure.cell.item.Item;
-import lombok.Getter;
+import com.github.jiangwangyang.square.adventure.common.Application;
+import com.github.jiangwangyang.square.adventure.common.Game;
+import com.github.jiangwangyang.square.adventure.common.TextureDrawerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class Entity implements Cell {
+public abstract class Entity extends AbstractCell {
 
     public static final int LEFT = 0;
     public static final int RIGHT = 1;
     public static final int UP = 2;
     public static final int DOWN = 3;
 
-    @Getter
-    protected final List<Action> actions = new CopyOnWriteArrayList<>();
-    private final TextureDrawer drawer;
-    public volatile int x, y, direction;
+    public final List<Action> actions = new CopyOnWriteArrayList<>();
+    public volatile String id;
+    public volatile int direction, kill;
     public volatile double health, maxHealth, damage;
-    public volatile boolean flip = false;
-    public volatile int kill;
-    protected boolean drawHealth = false;
-
-    public Entity(TextureDrawer drawer) {
-        this.drawer = drawer;
-    }
+    public volatile boolean flip, drawHealth;
 
     @Override
     public void draw() {
-        drawer.draw(x, y, 0, 1, flip);
+        TextureDrawerFactory.INSTANCE.get(getClass().getSimpleName()).draw(x, y, 0, 1, flip, true);
         // 血量
         if (drawHealth) {
             ShapeRenderer shapeRenderer = Application.INSTANCE.getShapeRenderer();
@@ -56,11 +48,6 @@ public abstract class Entity implements Cell {
         return health <= 0;
     }
 
-    public Action randomAction() {
-        List<Action> actionPool = Application.INSTANCE.getActionPool();
-        return actionPool.get(ThreadLocalRandom.current().nextInt(actionPool.size()));
-    }
-
     public void damaged(double damage) {
         this.health -= damage;
     }
@@ -74,7 +61,7 @@ public abstract class Entity implements Cell {
 
     // 范围伤害
     public void damageRange(double x, double y, double range, double damage) {
-        for (Entity entity : Application.INSTANCE.getGame().getEntities()) {
+        for (Entity entity : Game.INSTANCE.getEntities()) {
             if (entity != this) {
                 if (Math.sqrt(Math.pow(x - entity.x, 2) + Math.pow(y - entity.y, 2)) <= range) {
                     boolean alive = !entity.remove();
@@ -166,7 +153,7 @@ public abstract class Entity implements Cell {
     public List<Entity> nearestEntityList() {
         List<Entity> nearestEntityList = new ArrayList<>();
         double nearestDistance = Integer.MAX_VALUE;
-        for (Entity entity : Application.INSTANCE.getGame().getEntities()) {
+        for (Entity entity : Game.INSTANCE.getEntities()) {
             if (entity != this) {
                 double distance = distance(entity.x, entity.y);
                 if (distance == nearestDistance) {
@@ -186,7 +173,7 @@ public abstract class Entity implements Cell {
     public List<Item> nearestItemList() {
         List<Item> nearestItemList = new ArrayList<>();
         double nearestDistance = Integer.MAX_VALUE;
-        for (Item item : Application.INSTANCE.getGame().getItems()) {
+        for (Item item : Game.INSTANCE.getItems()) {
             double distance = distance(item.x, item.y);
             if (distance == nearestDistance) {
                 nearestItemList.add(item);

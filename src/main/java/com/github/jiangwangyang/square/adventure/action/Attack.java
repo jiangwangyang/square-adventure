@@ -1,8 +1,8 @@
 package com.github.jiangwangyang.square.adventure.action;
 
-import com.github.jiangwangyang.square.adventure.Application;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect1653;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
 public final class Attack implements Action {
 
@@ -40,6 +40,6 @@ public final class Attack implements Action {
                 break;
         }
         current.damageRange(x, y, Math.sqrt(2), current.damage);
-        Application.INSTANCE.getGame().getEffects().add(new Effect1653(x, y, 3));
+        Game.INSTANCE.getEffects().add(new Effect1653(x, y, 3));
     }
 }

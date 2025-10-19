@@ -1,28 +1,23 @@
 package com.github.jiangwangyang.square.adventure.cell.item;
 
-import com.github.jiangwangyang.square.adventure.TextureDrawer;
-import com.github.jiangwangyang.square.adventure.cell.Cell;
+import com.github.jiangwangyang.square.adventure.cell.AbstractCell;
+import com.github.jiangwangyang.square.adventure.common.TextureDrawer;
+import com.github.jiangwangyang.square.adventure.common.TextureDrawerFactory;
 
-public abstract class Item implements Cell {
+public abstract class Item extends AbstractCell {
 
-    public final int x, y;
-    private final TextureDrawer closedDrawer, openDrawer;
+    public volatile String closedDrawerName, openDrawerName;
     public volatile boolean open = false;
-
-    public Item(TextureDrawer closedDrawer, TextureDrawer openDrawer, int x, int y) {
-        this.closedDrawer = closedDrawer;
-        this.openDrawer = openDrawer;
-        this.x = x;
-        this.y = y;
-    }
 
     @Override
     public void draw() {
+        TextureDrawer drawer;
         if (open) {
-            openDrawer.draw(x, y);
+            drawer = TextureDrawerFactory.INSTANCE.get(openDrawerName);
         } else {
-            closedDrawer.draw(x, y);
+            drawer = TextureDrawerFactory.INSTANCE.get(closedDrawerName);
         }
+        drawer.draw(x, y);
     }
 
     @Override

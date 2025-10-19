@@ -1,9 +1,8 @@
 package com.github.jiangwangyang.square.adventure.action;
 
-import com.github.jiangwangyang.square.adventure.Application;
-import com.github.jiangwangyang.square.adventure.Game;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect520;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,9 +25,9 @@ public final class JumpRandom implements Action {
 
     @Override
     public void act(Entity current) {
-        Application.INSTANCE.getGame().getEffects().add(new Effect520(current.x, current.y, 4));
+        Game.INSTANCE.getEffects().add(new Effect520(current.x, current.y, 4));
         current.x = ThreadLocalRandom.current().nextInt(Game.WIDTH);
         current.y = ThreadLocalRandom.current().nextInt(Game.HEIGHT);
-        Application.INSTANCE.getGame().getEffects().add(new Effect520(current.x, current.y, 4));
+        Game.INSTANCE.getEffects().add(new Effect520(current.x, current.y, 4));
     }
 }

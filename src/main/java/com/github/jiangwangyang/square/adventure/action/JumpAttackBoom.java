@@ -1,8 +1,8 @@
 package com.github.jiangwangyang.square.adventure.action;
 
-import com.github.jiangwangyang.square.adventure.Application;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect515;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -50,6 +50,6 @@ public final class JumpAttackBoom implements Action {
                 break;
         }
         current.damageRange(x, y, Math.sqrt(2), current.damage * 1.2);
-        Application.INSTANCE.getGame().getEffects().add(new Effect515(x, y, 3));
+        Game.INSTANCE.getEffects().add(new Effect515(x, y, 3));
     }
 }

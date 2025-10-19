@@ -1,8 +1,8 @@
 package com.github.jiangwangyang.square.adventure.action;
 
-import com.github.jiangwangyang.square.adventure.Application;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect519;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.common.Game;
 
 public class DamageRangeBlack implements Action {
 
@@ -34,7 +34,7 @@ public class DamageRangeBlack implements Action {
                 default -> throw new IllegalStateException("Unexpected value: " + current.direction);
             }
             current.damageRange(x, y, 1, current.damage * 0.4);
-            Application.INSTANCE.getGame().getEffects().add(new Effect519(x, y, 2));
+            Game.INSTANCE.getEffects().add(new Effect519(x, y, 2));
         }
     }
 
