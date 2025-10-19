@@ -1,19 +1,18 @@
-package com.github.jiangwangyang.square.adventure.common;
+package com.github.jiangwangyang.square.adventure.util;
 
 import com.github.jiangwangyang.square.adventure.cell.plot.Plot;
-import com.github.jiangwangyang.square.adventure.util.PackageLoader;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class MapGenerator {
+public final class MapUtil {
 
     private static final int SEED_COUNT = 20;
     private static final double SPREAD_PROB = 0.75;
 
-    private static final List<Class<?>> BIOMES = PackageLoader
+    private static final List<Class<?>> BIOMES = PackageLoaderUtil
             .load("com.github.jiangwangyang.square.adventure.cell.plot")
             .stream()
             .filter(clazz -> Plot.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers()))

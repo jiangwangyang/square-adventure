@@ -2,7 +2,7 @@ package com.github.jiangwangyang.square.adventure.cell.item;
 
 import com.github.jiangwangyang.square.adventure.cell.AbstractCell;
 import com.github.jiangwangyang.square.adventure.common.TextureDrawer;
-import com.github.jiangwangyang.square.adventure.common.TextureDrawerFactory;
+import com.github.jiangwangyang.square.adventure.util.TextureDrawerFactory;
 
 public abstract class Item extends AbstractCell {
 
@@ -13,9 +13,9 @@ public abstract class Item extends AbstractCell {
     public void draw() {
         TextureDrawer drawer;
         if (open) {
-            drawer = TextureDrawerFactory.INSTANCE.get(openDrawerName);
+            drawer = TextureDrawerFactory.get(openDrawerName);
         } else {
-            drawer = TextureDrawerFactory.INSTANCE.get(closedDrawerName);
+            drawer = TextureDrawerFactory.get(closedDrawerName);
         }
         drawer.draw(x, y);
     }

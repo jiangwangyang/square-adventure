@@ -14,12 +14,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.jiangwangyang.square.adventure.action.Action;
-import com.github.jiangwangyang.square.adventure.action.ActionPool;
 import com.github.jiangwangyang.square.adventure.cell.Cell;
 import com.github.jiangwangyang.square.adventure.cell.effect.Effect;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
 import com.github.jiangwangyang.square.adventure.cell.item.Item;
 import com.github.jiangwangyang.square.adventure.cell.plot.Plot;
+import com.github.jiangwangyang.square.adventure.util.ActionUtil;
+import com.github.jiangwangyang.square.adventure.util.TextureDrawerFactory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,11 +53,11 @@ public final class Application extends ApplicationAdapter {
     @Override
     public void create() {
         // 初始化资源
-        TextureDrawerFactory.INSTANCE.init();
+        TextureDrawerFactory.init();
         // 初始化中文字体
         FreeTypeFontGenerator freeTypeFontGenerator = new FreeTypeFontGenerator(Gdx.files.classpath("font/simhei.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param.characters = FreeTypeFontGenerator.DEFAULT_CHARS + ActionPool.ACTION_POOL.stream().map(Action::name).collect(Collectors.joining());
+        param.characters = FreeTypeFontGenerator.DEFAULT_CHARS + ActionUtil.allActions().stream().map(Action::name).collect(Collectors.joining());
         bitmapFont = freeTypeFontGenerator.generateFont(param);
         freeTypeFontGenerator.dispose();
         // 初始化gdx

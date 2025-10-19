@@ -8,7 +8,7 @@ import com.github.jiangwangyang.square.adventure.cell.Cell;
 import com.github.jiangwangyang.square.adventure.cell.item.Item;
 import com.github.jiangwangyang.square.adventure.common.Application;
 import com.github.jiangwangyang.square.adventure.common.Game;
-import com.github.jiangwangyang.square.adventure.common.TextureDrawerFactory;
+import com.github.jiangwangyang.square.adventure.util.TextureDrawerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class Entity extends AbstractCell {
 
     @Override
     public void draw() {
-        TextureDrawerFactory.INSTANCE.get(getClass().getSimpleName()).draw(x, y, 0, 1, flip, true);
+        TextureDrawerFactory.get(getClass().getSimpleName()).draw(x, y, 0, 1, flip, true);
         // 血量
         if (drawHealth) {
             ShapeRenderer shapeRenderer = Application.INSTANCE.getShapeRenderer();

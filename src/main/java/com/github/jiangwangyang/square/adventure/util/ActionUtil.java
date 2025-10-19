@@ -1,6 +1,6 @@
-package com.github.jiangwangyang.square.adventure.action;
+package com.github.jiangwangyang.square.adventure.util;
 
-import com.github.jiangwangyang.square.adventure.util.PackageLoader;
+import com.github.jiangwangyang.square.adventure.action.Action;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class ActionPool {
+public final class ActionUtil {
 
-    public static final List<Action> ACTION_POOL = new ArrayList<>();
+    private static final List<Action> ACTION_POOL = new ArrayList<>();
 
     static {
-        List<Class<?>> actionClassList = PackageLoader.load("com.github.jiangwangyang.square.adventure.action");
+        List<Class<?>> actionClassList = PackageLoaderUtil.load("com.github.jiangwangyang.square.adventure.action");
         try {
             for (Class<?> clazz : actionClassList) {
                 if (Action.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers())) {
@@ -29,11 +29,15 @@ public final class ActionPool {
         }
     }
 
-    private ActionPool() {
+    private ActionUtil() {
     }
 
     public static Action randomAction() {
         return ACTION_POOL.get(ThreadLocalRandom.current().nextInt(ACTION_POOL.size()));
+    }
+
+    public static List<Action> allActions() {
+        return List.of(ACTION_POOL.toArray(Action[]::new));
     }
 
 }

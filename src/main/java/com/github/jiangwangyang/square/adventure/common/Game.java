@@ -7,6 +7,7 @@ import com.github.jiangwangyang.square.adventure.cell.item.Item;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemDrop;
 import com.github.jiangwangyang.square.adventure.cell.item.ItemRandom;
 import com.github.jiangwangyang.square.adventure.cell.plot.Plot;
+import com.github.jiangwangyang.square.adventure.util.MapUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +47,7 @@ public final class Game implements Runnable {
         items = new CopyOnWriteArrayList<>();
         effects = new CopyOnWriteArrayList<>();
         // 初始化grid网格
-        MapGenerator.generate(grid);
+        MapUtil.generate(grid);
         // plot列表为空
         // 初始化entity列表
         for (int i = 0; i < PLAYER_NUM; i++) {

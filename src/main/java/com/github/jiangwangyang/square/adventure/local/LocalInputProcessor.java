@@ -11,7 +11,7 @@ import com.github.jiangwangyang.square.adventure.common.Game;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class LocalInputProcessor implements InputProcessor {
+public final class LocalInputProcessor implements InputProcessor {
 
     private final String id = Application.INSTANCE.getId();
     private final ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();

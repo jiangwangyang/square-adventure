@@ -1,7 +1,7 @@
 package com.github.jiangwangyang.square.adventure.cell.entity.player;
 
 import com.github.jiangwangyang.square.adventure.action.Action;
-import com.github.jiangwangyang.square.adventure.action.ActionPool;
+import com.github.jiangwangyang.square.adventure.util.ActionUtil;
 import lombok.Getter;
 
 import java.util.concurrent.BlockingQueue;
@@ -26,7 +26,7 @@ public final class InputPlayer extends Player {
         } catch (InterruptedException ignored) {
         } finally {
             if (ThreadLocalRandom.current().nextInt(100) < 10 && actions.size() < 9) {
-                actions.add(ActionPool.randomAction());
+                actions.add(ActionUtil.randomAction());
             }
         }
     }

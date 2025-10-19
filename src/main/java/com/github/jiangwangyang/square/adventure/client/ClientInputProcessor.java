@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.github.jiangwangyang.square.adventure.common.Application;
 import org.springframework.web.client.RestClient;
 
-public class ClientInputProcessor implements InputProcessor {
+public final class ClientInputProcessor implements InputProcessor {
 
     private final RestClient restClient = RestClient.create();
     private final String id = Application.INSTANCE.getId();

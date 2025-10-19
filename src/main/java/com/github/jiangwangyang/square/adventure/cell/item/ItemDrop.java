@@ -1,10 +1,10 @@
 package com.github.jiangwangyang.square.adventure.cell.item;
 
 import com.github.jiangwangyang.square.adventure.action.Action;
-import com.github.jiangwangyang.square.adventure.action.ActionPool;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
 import com.github.jiangwangyang.square.adventure.cell.entity.player.Player;
 import com.github.jiangwangyang.square.adventure.common.Game;
+import com.github.jiangwangyang.square.adventure.util.ActionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public final class ItemDrop extends Item {
                     }
                 }
                 if (player.actions.size() < 9) {
-                    player.actions.add(ActionPool.randomAction());
+                    player.actions.add(ActionUtil.randomAction());
                 }
             }
         }

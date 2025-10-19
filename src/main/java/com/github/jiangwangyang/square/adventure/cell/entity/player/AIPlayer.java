@@ -2,6 +2,7 @@ package com.github.jiangwangyang.square.adventure.cell.entity.player;
 
 import com.github.jiangwangyang.square.adventure.action.*;
 import com.github.jiangwangyang.square.adventure.cell.entity.Entity;
+import com.github.jiangwangyang.square.adventure.util.ActionUtil;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -36,7 +37,7 @@ public final class AIPlayer extends Player {
             }
         } finally {
             if (ThreadLocalRandom.current().nextInt(100) < 10 && actions.size() < 9) {
-                actions.add(ActionPool.randomAction());
+                actions.add(ActionUtil.randomAction());
             }
         }
     }

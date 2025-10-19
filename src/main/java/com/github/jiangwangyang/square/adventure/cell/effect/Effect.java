@@ -1,7 +1,7 @@
 package com.github.jiangwangyang.square.adventure.cell.effect;
 
 import com.github.jiangwangyang.square.adventure.cell.AbstractCell;
-import com.github.jiangwangyang.square.adventure.common.TextureDrawerFactory;
+import com.github.jiangwangyang.square.adventure.util.TextureDrawerFactory;
 
 
 public abstract class Effect extends AbstractCell {
@@ -15,7 +15,7 @@ public abstract class Effect extends AbstractCell {
         if (remove()) {
             return;
         }
-        TextureDrawerFactory.INSTANCE.get(getClass().getSimpleName()).draw(x, y, startMillis, scale, false, false);
+        TextureDrawerFactory.get(getClass().getSimpleName()).draw(x, y, startMillis, scale, false, false);
     }
 
     @Override

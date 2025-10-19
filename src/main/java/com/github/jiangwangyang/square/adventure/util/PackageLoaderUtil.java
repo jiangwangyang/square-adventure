@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public final class PackageLoader {
+public final class PackageLoaderUtil {
 
-    private PackageLoader() {
+    private PackageLoaderUtil() {
     }
 
     /**
